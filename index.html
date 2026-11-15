@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orbisys — Decode Earth’s Vital Signs in Real Time</title>
+    <meta name="description" content="Orbisys transforms live NASA satellite observations into clear environmental trend intelligence." />
+    <meta property="og:title" content="Orbisys — Decode Earth’s Vital Signs in Real Time" />
+    <meta property="og:description" content="Orbisys transforms live NASA satellite observations into clear environmental trend intelligence." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    <script>
+      if (window.location.pathname === '/dashboard') {
+        document.documentElement.classList.add('is-dashboard');
+      }
+    </script>
+    <style>
+      :root {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #fff;
+        background: #090807;
+        font-synthesis: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+        background: #090807;
+      }
+
+      html.is-dashboard,
+      html.is-dashboard body {
+        background: #000;
+      }
+
+      html.is-dashboard #landing-view {
+        display: none;
+      }
+
+      .experience {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        min-height: 580px;
+        overflow: hidden;
+        background: #0a0908;
+      }
+
+      .backgrounds,
+      .background {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .backgrounds {
+        z-index: 1;
+      }
+
+      .background {
+        object-fit: cover;
+        opacity: 1;
+      }
+
+      .chrome {
+        position: absolute;
+        z-index: 4;
+      }
+
+      /* Header */
+      .header {
+        left: clamp(18px, 1.95vw, 28px);
+        right: clamp(18px, 1.95vw, 28px);
+        top: clamp(18px, 3.1vh, 28px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .brand {
+        color: #fff;
+        text-decoration: none;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1;
+      }
+
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 42px;
+        padding: 0 20px;
+        border: 0;
+        border-radius: 999px;
+        background: #fff;
+        color: #000;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+      }
+
+      .hero-cta:hover {
+        opacity: 0.92;
+        transform: translateY(-1px);
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.8);
+        outline-offset: 3px;
+      }
+
+      /* Hero Left */
+      .hero {
+        left: clamp(18px, 1.95vw, 28px);
+        top: 50%;
+        transform: translateY(-50%);
+        width: min(740px, calc(100% - 2 * clamp(18px, 1.95vw, 28px)));
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero h1 {
+        margin: 0 0 18px;
+        font-size: clamp(36px, 4.6vw, 64px);
+        font-weight: 700;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+      }
+
+      .hero p {
+        margin: 0 0 28px;
+        max-width: 600px;
+        font-size: clamp(15px, 1.25vw, 18px);
+        font-weight: 400;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      /* How It Works Section */
+      .how-it-works {
+        position: relative;
+        width: 100%;
+        padding: clamp(72px, 10vh, 120px) clamp(18px, 1.95vw, 28px);
+        background: #090807;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .section-inner {
+        width: 100%;
+        max-width: 1384px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 20px 40px;
+        margin-bottom: clamp(36px, 5vh, 52px);
+        padding-bottom: 28px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .section-header h2 {
+        margin: 0;
+        font-size: clamp(30px, 3.1vw, 44px);
+        font-weight: 700;
+        line-height: 1.12;
+        letter-spacing: -0.025em;
+        color: #fff;
+      }
+
+      .section-lead {
+        margin: 0;
+        max-width: 440px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(24px, 2.4vw, 36px);
+      }
+
+      .step-card {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .step-media {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+      }
+
+      .step-image-frame {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
+        overflow: hidden;
+        background: #141416;
+        -webkit-mask-image:
+          linear-gradient(#fff, #fff),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Cpath fill='%23fff' d='M112 11.07A22 22 0 0 1 86.12 32.72A46 46 0 0 0 32.72 86.12A22 22 0 0 1 11.07 112H112Z'/%3E%3C/svg%3E");
+        -webkit-mask-position: 0 0, right bottom;
+        -webkit-mask-size: 100% 100%, 112px 112px;
+        -webkit-mask-repeat: no-repeat, no-repeat;
+        -webkit-mask-composite: xor;
+        mask-image:
+          linear-gradient(#fff, #fff),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Cpath fill='%23fff' d='M112 11.07A22 22 0 0 1 86.12 32.72A46 46 0 0 0 32.72 86.12A22 22 0 0 1 11.07 112H112Z'/%3E%3C/svg%3E");
+        mask-position: 0 0, right bottom;
+        mask-size: 100% 100%, 112px 112px;
+        mask-repeat: no-repeat, no-repeat;
+        mask-composite: exclude;
+      }
+
+      .step-image-frame img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .step-icon-badge {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 3;
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: #141417;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        color: #f4f4f5;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+      }
+
+      .step-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding-top: 22px;
+      }
+
+      .step-card h3 {
+        margin: 0 0 10px;
+        font-size: clamp(22px, 1.85vw, 28px);
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.025em;
+        color: #fff;
+      }
+
+      .step-card p {
+        margin: 0 0 18px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.58;
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .step-tags {
+        margin-top: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .step-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: #18181b;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        line-height: 1.1;
+        color: rgba(255, 255, 255, 0.84);
+      }
+
+      /* Footer */
+      .site-footer {
+        width: 100%;
+        padding: clamp(56px, 8vh, 84px) clamp(18px, 1.95vw, 28px);
+        background: #090807;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-inner {
+        width: 100%;
+        max-width: 1384px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 24px;
+        font-size: 14px;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .footer-primary {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.84);
+      }
+
+      .footer-social {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .footer-social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        color: rgba(255, 255, 255, 0.66);
+        transition: color 0.2s ease, transform 0.2s ease;
+      }
+
+      .footer-social-link:hover {
+        color: #fff;
+        transform: translateY(-1px);
+      }
+
+      .footer-disclosure {
+        margin: 0;
+        max-width: 720px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.52);
+      }
+
+      /* Entrance Animations */
+      body:not(.intro-ready) .header,
+      body:not(.intro-ready) .hero h1,
+      body:not(.intro-ready) .hero p,
+      body:not(.intro-ready) .hero-cta {
+        opacity: 0;
+      }
+
+      .intro-ready .header {
+        animation: reveal-down 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+      }
+
+      .intro-ready .hero h1 {
+        animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+      }
+
+      .intro-ready .hero p {
+        animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+      }
+
+      .intro-ready .hero-cta {
+        animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.46s both;
+      }
+
+      @keyframes reveal-down {
+        from {
+          opacity: 0;
+          filter: blur(8px);
+          transform: translateY(-16px);
+        }
+        to {
+          opacity: 1;
+          filter: blur(0);
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes hero-rise {
+        from {
+          opacity: 0;
+          filter: blur(8px);
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          filter: blur(0);
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .steps-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .experience {
+          min-height: 600px;
+        }
+        .brand {
+          font-size: 20px;
+        }
+        .hero-cta {
+          height: 38px;
+          padding: 0 18px;
+          font-size: 14px;
+        }
+        .hero {
+          width: calc(100% - 36px);
+        }
+        .hero h1 {
+          margin-bottom: 14px;
+        }
+        .hero p {
+          margin-bottom: 22px;
+        }
+        .section-header {
+          padding-bottom: 22px;
+          margin-bottom: 28px;
+        }
+        .steps-grid {
+          gap: 32px;
+        }
+        .step-content {
+          padding-top: 18px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="landing-view">
+    <main>
+    <section class="experience" id="hero">
+      <div class="backgrounds" aria-hidden="true">
+        <video id="earth-background" class="background" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4" muted playsinline preload="auto"></video>
+      </div>
+
+      <header class="header chrome">
+        <a href="#hero" class="brand">Orbisys</a>
+      </header>
+
+      <div class="hero chrome" aria-label="Hero">
+        <h1>Decode Earth’s Vital Signs in Real Time.</h1>
+        <p>Orbisys transforms live NASA satellite observations into clear environmental trend intelligence.</p>
+        <a class="hero-cta" id="view-dashboard" href="/dashboard">View Dashboard</a>
+      </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works" aria-labelledby="how-it-works-title">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 id="how-it-works-title">How It Works</h2>
+          <p class="section-lead">From live orbital telemetry to structured environmental intelligence in three automated stages.</p>
+        </div>
+        <div class="steps-grid">
+          <article class="step-card">
+            <div class="step-media">
+              <div class="step-image-frame">
+                <img src="/src/assets/images/orbisys_planet_ingest_1794748187622.jpg" alt="Earth observation satellite orbiting sunlit planet Earth in deep space" referrerpolicy="no-referrer" />
+              </div>
+              <span class="step-icon-badge" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m13.5 6.5-3.148-3.148a1.205 1.205 0 0 0-1.704 0L6.352 5.648a1.205 1.205 0 0 0 0 1.704L9.5 10.5" />
+                  <path d="M16.5 7.5 19 5" />
+                  <path d="m17.5 10.5 3.148 3.148a1.205 1.205 0 0 1 0 1.704l-2.296 2.296a1.205 1.205 0 0 1-1.704 0L13.5 14.5" />
+                  <path d="M9 21a6 6 0 0 0-6-6" />
+                  <path d="M9.352 10.648a1.205 1.205 0 0 0 0 1.704l2.296 2.296a1.205 1.205 0 0 0 1.704 0l4.296-4.296a1.205 1.205 0 0 0 0-1.704l-2.296-2.296a1.205 1.205 0 0 0-1.704 0z" />
+                </svg>
+              </span>
+            </div>
+            <div class="step-content">
+              <h3>Ingest</h3>
+              <p>Fetches live orbital feeds from NASA EONET v3.</p>
+              <div class="step-tags">
+                <span class="step-tag">Data Source</span>
+                <span class="step-tag">NASA EONET v3</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-media">
+              <div class="step-image-frame">
+                <img src="/src/assets/images/orbisys_planet_detect_1794748187923.jpg" alt="Orbital satellite view of planetary cyclone and wildfire anomalies on Earth" referrerpolicy="no-referrer" />
+              </div>
+              <span class="step-icon-badge" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19.07 4.93A10 10 0 0 0 6.99 3.34" />
+                  <path d="M4 6h.01" />
+                  <path d="M2.29 9.62A10 10 0 1 0 21.31 8.35" />
+                  <path d="M16.24 7.76A6 6 0 1 0 8.23 16.67" />
+                  <path d="M12 18h.01" />
+                  <path d="M17.99 11.66A6 6 0 0 1 15.77 16.67" />
+                  <circle cx="12" cy="12" r="2" />
+                  <path d="m13.41 10.59 5.66-5.66" />
+                </svg>
+              </span>
+            </div>
+            <div class="step-content">
+              <h3>Detect</h3>
+              <p>Categorizes &amp; compares anomalies across 7D/30D/90D trend windows.</p>
+              <div class="step-tags">
+                <span class="step-tag">Trend Windows</span>
+                <span class="step-tag">7D · 30D · 90D</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-media">
+              <div class="step-image-frame">
+                <img src="/src/assets/images/orbisys_planet_synthesize_real_1794748504732.jpg" alt="Orbital view of illuminated Earth coastlines, river delta, and atmospheric horizon at sunrise" referrerpolicy="no-referrer" />
+              </div>
+              <span class="step-icon-badge" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                  <path d="M4.268 21a2 2 0 0 0 1.727 1H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3" />
+                  <path d="m9 18-1.5-1.5" />
+                  <circle cx="5" cy="14" r="3" />
+                </svg>
+              </span>
+            </div>
+            <div class="step-content">
+              <h3>Synthesize</h3>
+              <p>Generates instant detective dossiers with coordinates &amp; environmental context.</p>
+              <div class="step-tags">
+                <span class="step-tag">Deliverable</span>
+                <span class="step-tag">Geo-Context Dossier</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p class="footer-primary">Built for NASA Space Apps Challenge 2026 • Powered by NASA Open Data</p>
+        <div class="footer-social">
+          <a class="footer-social-link" href="https://github.com/devminhal/Orbisys/" target="_blank" rel="noopener noreferrer" aria-label="Orbisys on GitHub">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
+            </svg>
+          </a>
+        </div>
+        <p class="footer-disclosure">SI/AI Disclosure: Satellite telemetry sourced from NASA Open Data (EONET v3); anomaly summaries and environmental dossiers are assisted by synthetic/artificial intelligence.</p>
+      </div>
+    </footer>
+    </div>
+
+    <div id="root"></div>
+
+    <script>
+      (function () {
+        const earthBackground = document.getElementById('earth-background');
+        const viewDashboardBtn = document.getElementById('view-dashboard');
+
+        function startExperience() {
+          earthBackground.loop = true;
+          earthBackground.play().catch(() => {});
+          document.body.classList.add('intro-ready');
+        }
+
+        viewDashboardBtn.addEventListener('click', (e) => {
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+          e.preventDefault();
+          window.history.pushState(null, '', '/dashboard');
+          window.dispatchEvent(new CustomEvent('orbisys:navigate'));
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        });
+
+        startExperience();
+      })();
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
